@@ -12,29 +12,31 @@
 // For ".><.>>.<<" -> 11 photos were taken
 // For ">.>..<" -> 8 photos were taken
 
-console.log(`">>." expected: 2 result: ${countPhotos(">>.")}`) 
-console.log(`".>>" expected: 0 result: ${countPhotos(".>>")}`) 
-console.log(`">.<." expected: 3 result: ${countPhotos(">.<.")}`) 
-console.log(`".><.>>.<<" expected: 11 result: ${countPhotos(".><.>>.<<")}`) 
-console.log(`">.>..<" expected: 8 result: ${countPhotos(">.>..<")}`) 
-console.log(`"..<>.>>.><>>.<<<.<>>.>.>>>>>..><<.>.>>..>.>>><><>." expected: 248 result: ${countPhotos("..<>.>>.><>>.<<<.<>>.>.>>>>>..><<.>.>>..>.>>><><>.")}`) 
+import { Test } from "./helpers/Test.js";
 
-function countPhotos(road){
-  if(!road.includes('.')) return 0;
- 
+function countPhotos(road) {
+  if (!road.includes('.')) return 0;
+
   let res = 0;
   const OPERATIONS = {
-    '>' : (i) => res += road.substring(i).match(/[\.]/g)?.length || 0,
-    '<' : (i) => res += road.substring(0,i).match(/[\.]/g)?.length || 0,
+    '>': (i) => res += road.substring(i).match(/[\.]/g)?.length || 0,
+    '<': (i) => res += road.substring(0, i).match(/[\.]/g)?.length || 0,
   }
 
-  for(let i = 0; i < road.length; i++){
-    if(road[i] === '.') continue;
+  for (let i = 0; i < road.length; i++) {
+    if (road[i] === '.') continue;
     OPERATIONS[road[i]](i);
   }
-  
+
   return res;
 }
+
+Test.assert(countPhotos(">>."), 2);
+Test.assert(countPhotos(".>>"), 0);
+Test.assert(countPhotos(">.<."), 3);
+Test.assert(countPhotos(".><.>>.<<"), 11);
+Test.assert(countPhotos(">.>..<"), 8);
+Test.assert(countPhotos("..<>.>>.><>>.<<<.<>>.>.>>>>>..><<.>.>>..>.>>><><>."), 248)
 
 
 //NOTE: THIS TIMESOUT IN THE TEST FOR Execution Timed Out (12000 ms)
