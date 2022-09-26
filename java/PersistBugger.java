@@ -4,8 +4,8 @@
 // 4 --> 0 (because 4 is already a one-digit number)
 
 class PersistBugger {
-	public static int persistence(long n) {
-		int i = 0;
+  public static int persistence(long n) {
+    int i = 0;
 
     while (n > 9) {
       int tmp = 1;
